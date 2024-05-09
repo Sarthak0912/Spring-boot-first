@@ -1,6 +1,7 @@
 package com.springboot.crudoperation.service.impl;
 
 
+import com.springboot.crudoperation.exception.DataNotFoundException;
 import com.springboot.crudoperation.model.School;
 import com.springboot.crudoperation.service.SchoolService;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,6 @@ public class SchoolServiceImpl implements SchoolService {
         school.setAddress("Pune");
         String[] colours = {"Red", "Blue", "Green", "Yellow"};
         school.setDressCodeColors(Arrays.stream(colours).toList());
-
         return school;
     }
 
