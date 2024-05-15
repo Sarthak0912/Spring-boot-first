@@ -6,8 +6,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
+
 
 @MappedSuperclass
 @Getter
@@ -22,5 +24,6 @@ public class BaseEntity {
     Date updatedDate;
 
     String updatedBy;
+    int isDeleted;
 
 }

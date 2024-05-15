@@ -13,6 +13,6 @@ public interface SchoolService {
 
     SchoolDto findSchoolById(int schoolId);
 
-    Map deleteSchoolById(int schoolId);
+    void deleteSchoolById(int schoolId);
 
 }

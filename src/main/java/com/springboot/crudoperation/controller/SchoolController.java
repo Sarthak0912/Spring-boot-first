@@ -39,7 +39,7 @@ public class SchoolController {
     @GetMapping(value = "{schoolId}")
     public ResponseEntity<?> getSchoolUsingRespDto(@PathVariable int schoolId) {
 
-        return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.OK.value()).message("s").data(schoolService.findSchoolById(schoolId)).build(),HttpStatus.OK);
+        return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.OK.value()).message("successfully fetched!").data(schoolService.findSchoolById(schoolId)).build(),HttpStatus.OK);
     }
 
 //    @GetMapping(value = "/school")
@@ -63,7 +63,8 @@ public class SchoolController {
     @DeleteMapping (value = "{schoolId}")
     public ResponseEntity<?> deleteValueUsingPV(@PathVariable int schoolId){
 
-        return new ResponseEntity<>(schoolService.deleteSchoolById(schoolId), HttpStatus.OK);
+        schoolService.deleteSchoolById(schoolId);
+        return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.OK.value()).message("Record Deleted!").build(),HttpStatus.OK);
     }
 
 }
