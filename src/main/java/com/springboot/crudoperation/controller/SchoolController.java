@@ -1,14 +1,11 @@
 package com.springboot.crudoperation.controller;
 
 import com.springboot.crudoperation.model.ResponseDto;
-import com.springboot.crudoperation.model.School;
+import com.springboot.crudoperation.model.SchoolDto;
 import com.springboot.crudoperation.service.SchoolService;
-import com.springboot.crudoperation.service.impl.SchoolServiceImpl;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,15 +50,15 @@ public class SchoolController {
 //    }
 
     @PostMapping
-    public ResponseEntity<?> postValue(@RequestBody School school){
+    public ResponseEntity<?> postValue(@RequestBody SchoolDto schoolDto){
 
-        return new ResponseEntity<>(schoolService.saveSchool(school), HttpStatus.CREATED);
+        return new ResponseEntity<>(schoolService.saveSchool(schoolDto), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<?> putValue(@RequestBody School school) throws Exception {
+    public ResponseEntity<?> putValue(@RequestBody SchoolDto schoolDto) throws Exception {
 
-        return new ResponseEntity<>(schoolService.updateSchool(school), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(schoolService.updateSchool(schoolDto), HttpStatus.ACCEPTED);
     }
     @DeleteMapping (value = "{schoolId}")
     public ResponseEntity<?> deleteValueUsingPV(@PathVariable int schoolId){
