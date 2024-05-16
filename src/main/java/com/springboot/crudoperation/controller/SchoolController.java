@@ -67,4 +67,10 @@ public class SchoolController {
         return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.OK.value()).message("Record Deleted!").build(),HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> getValueUsingRP(@RequestParam("SearchText") String searchText){
+
+       return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.FOUND.value()).message("Records fetched").listData(schoolService.findSchoolBySearchText(searchText)).build(),HttpStatus.FOUND);
+   }
 }
+

@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SchoolServiceImpl implements SchoolService {
@@ -73,8 +74,12 @@ public class SchoolServiceImpl implements SchoolService {
         else{
             throw new DataNotFoundException("Record not found!");
         }
-
-
+    }
+    @Override
+    public List<Object> findSchoolBySearchText(String searchText){
+        List<School> schools= schoolRepository.findSchoolBySearchText(searchText);
+        //return schools.stream().map(school ->SchoolMapper.mapToSchoolDto(school)).collect(Collectors.toList());
+        return schools.stream().map(SchoolMapper::mapToSchoolDto).collect(Collectors.toList());
     }
 
 }

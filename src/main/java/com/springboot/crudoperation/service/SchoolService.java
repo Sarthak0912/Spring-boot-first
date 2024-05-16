@@ -3,7 +3,7 @@ package com.springboot.crudoperation.service;
 
 import com.springboot.crudoperation.model.SchoolDto;
 
-import java.util.Map;
+import java.util.List;
 
 public interface SchoolService {
 
@@ -14,5 +14,6 @@ public interface SchoolService {
     SchoolDto findSchoolById(int schoolId);
 
     void deleteSchoolById(int schoolId);
+    public List<Object> findSchoolBySearchText(String searchText);
 
 }
