@@ -68,9 +68,21 @@ public class SchoolController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getValueUsingRP(@RequestParam("SearchText") String searchText){
+    public ResponseEntity<?> searchSchoolsBySearch(@RequestParam("SearchText") String searchText){
 
        return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.FOUND.value()).message("Records fetched").listData(schoolService.findSchoolBySearchText(searchText)).build(),HttpStatus.FOUND);
    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getSchoolsBySort(@RequestParam("pageNo") int pageNo,@RequestParam("pageSize")int pageSize,@RequestParam("sortBy")String sortBy,@RequestParam("sortDir")String sortDir){
+
+        return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.FOUND.value()).message("Records fetched").data(schoolService.findAll(pageNo,pageSize,sortBy,sortDir)).build(),HttpStatus.FOUND);
+    }
+
+    @GetMapping(value = "/byAll")
+    public ResponseEntity<?> getSchoolsBySearchAndSort(@RequestParam("SearchText") String searchText,@RequestParam("pageNo") int pageNo,@RequestParam("pageSize")int pageSize,@RequestParam("sortBy")String sortBy,@RequestParam("sortDir")String sortDir){
+
+        return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.FOUND.value()).message("Records fetched").data(schoolService.searchAll(searchText,pageNo,pageSize,sortBy,sortDir)).build(),HttpStatus.FOUND);
+    }
 }
 
