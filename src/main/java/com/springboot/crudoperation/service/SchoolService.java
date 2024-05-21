@@ -17,7 +17,7 @@ public interface SchoolService {
     SchoolDto findSchoolById(int schoolId);
 
     void deleteSchoolById(int schoolId);
-    public List<Object> findSchoolBySearchText(String searchText);
+    public List<SchoolDto> findSchoolBySearchText(String searchText);
 
     public PageResponse<?> findAll(int pageNo, int pageSize, String sortBy, String sortDir);
     public PageResponse<?> searchAll(String searchText,int pageNo, int pageSize, String sortBy, String sortDir);

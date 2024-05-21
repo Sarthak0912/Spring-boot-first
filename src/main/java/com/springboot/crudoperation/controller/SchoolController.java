@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 @Tag(name="School Controller", description = "This is used to perform crud operations on school data")
 @RequestMapping(value = "/school")
 @RestController
@@ -42,12 +44,12 @@ public class SchoolController {
         return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.OK.value()).message("successfully fetched!").data(schoolService.findSchoolById(schoolId)).build(),HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/school")
+    @GetMapping
 
-//    public ResponseEntity<?> getValueUsingRP(@RequestParam("SID") int schoolId){
-//
-//        return new ResponseEntity<>(schoolService.findSchoolById(schoolId), HttpStatus.FOUND);
-//    }
+    public ResponseEntity<?> getValueUsingRP(@RequestParam("SID") int schoolId){
+
+        return new ResponseEntity<>(schoolService.findSchoolById(schoolId), HttpStatus.FOUND);
+    }
 
     @PostMapping
     public ResponseEntity<?> postValue(@RequestBody SchoolDto schoolDto){
@@ -67,10 +69,10 @@ public class SchoolController {
         return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.OK.value()).message("Record Deleted!").build(),HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping(value = "/data")
     public ResponseEntity<?> searchSchoolsBySearch(@RequestParam("SearchText") String searchText){
 
-       return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.FOUND.value()).message("Records fetched").listData(schoolService.findSchoolBySearchText(searchText)).build(),HttpStatus.FOUND);
+       return new ResponseEntity<>(ResponseDto.builder().statusCode(HttpStatus.FOUND.value()).message("Records fetched").listData(Collections.singletonList(schoolService.findSchoolBySearchText(searchText))).build(),HttpStatus.FOUND);
    }
 
     @GetMapping(value = "/all")

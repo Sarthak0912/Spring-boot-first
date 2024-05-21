@@ -21,4 +21,6 @@ public class SchoolDto {
       Date updatedDate;
 
       String updatedBy;
+
+      List<ClassRoomDto> classRooms;
 }

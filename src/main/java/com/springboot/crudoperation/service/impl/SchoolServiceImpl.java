@@ -1,6 +1,7 @@
 package com.springboot.crudoperation.service.impl;
 
 
+import com.springboot.crudoperation.entity.ClassRoom;
 import com.springboot.crudoperation.entity.School;
 import com.springboot.crudoperation.exception.DataNotFoundException;
 import com.springboot.crudoperation.mapper.SchoolMapper;
@@ -81,10 +82,8 @@ public class SchoolServiceImpl implements SchoolService {
         }
     }
     @Override
-    public List<Object> findSchoolBySearchText(String searchText){
-        List<School> schools= schoolRepository.findSchoolBySearchText(searchText);
-        //return schools.stream().map(school ->SchoolMapper.mapToSchoolDto(school)).collect(Collectors.toList());
-        return schools.stream().map(SchoolMapper::mapToSchoolDto).collect(Collectors.toList());
+    public List<SchoolDto> findSchoolBySearchText(String searchText){
+        return SchoolMapper.mapToSchoolDtos(schoolRepository.findSchoolBySearchText(searchText));
     }
 
     @Override
@@ -93,7 +92,7 @@ public class SchoolServiceImpl implements SchoolService {
         Pageable pageable=PageRequest.of(pageNo,pageSize,sort);
         Page<School> page=schoolRepository.findAll(pageable);
         List<School> schools=page.getContent();
-        List<SchoolDto> schoolDtos=schools.stream().map(SchoolMapper::mapToSchoolDto).toList();
+        List<SchoolDto> schoolDtos=SchoolMapper.mapToSchoolDtos(schools);
         PageResponse<SchoolDto> pageResponse=new PageResponse<>();
         pageResponse.setPageNo(page.getNumber());
         pageResponse.setPageSize(page.getSize());
@@ -107,10 +106,11 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public PageResponse<?> searchAll(String searchText, int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())?Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
+        pageSize= pageSize==0?1:pageSize;
         Pageable pageable=PageRequest.of(pageNo,pageSize,sort);
-        Page<School> page=schoolRepository.findSchoolBySearchTextWithPagination(searchText,pageable);
+        Page<School> page= searchText==null||searchText.isEmpty()?schoolRepository.findAll(pageable):schoolRepository.findSchoolBySearchTextWithPagination(searchText,pageable);
         List<School> schools=page.getContent();
-        List<SchoolDto> schoolDtos=schools.stream().map(SchoolMapper::mapToSchoolDto).toList();
+        List<SchoolDto> schoolDtos=SchoolMapper.mapToSchoolDtos(schools);
         PageResponse<SchoolDto> pageResponse=new PageResponse<>();
         pageResponse.setPageNo(page.getNumber());
         pageResponse.setPageSize(page.getSize());
