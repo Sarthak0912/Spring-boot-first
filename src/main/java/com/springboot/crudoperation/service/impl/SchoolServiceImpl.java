@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ public class SchoolServiceImpl implements SchoolService {
         return schoolDto;
     }
 
+    @Transactional
     @Override
     public SchoolDto updateSchool(SchoolDto schoolDto)  {
         Optional<School> optionalData= schoolRepository.findByIdAndIsDeleted(schoolDto.getId(),0);

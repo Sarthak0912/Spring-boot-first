@@ -2,7 +2,11 @@ package com.springboot.crudoperation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableTransactionManagement
+@EnableWebSecurity
 @SpringBootApplication
 public class CrudOperationApplication {
 

@@ -1,14 +1,16 @@
 package com.springboot.crudoperation.entity;
 
-import jakarta.persistence.Entity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import javax.persistence.*;
 
 @Entity(name = "classroom")
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class ClassRoom extends BaseEntity {
 
     String name;

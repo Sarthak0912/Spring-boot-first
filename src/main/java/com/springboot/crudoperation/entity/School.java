@@ -1,20 +1,23 @@
 package com.springboot.crudoperation.entity;
 
-import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "school")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
 public class School extends BaseEntity {
 
     String name;
     String address;
-    List<String> dressCodeColors;
+    String dressCodeColors;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
             @JoinColumn(name = "school_Id")

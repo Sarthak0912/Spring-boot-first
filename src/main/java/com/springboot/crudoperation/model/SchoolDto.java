@@ -13,7 +13,7 @@ public class SchoolDto {
       Long id;
       String name;
       String address;
-      List<String> dressCodeColors;
+      String dressCodeColors;
 
       Date createdDate;
 
