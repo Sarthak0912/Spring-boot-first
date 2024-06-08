@@ -10,7 +10,7 @@ public interface UserService {
 
     public UserDto signUp(UserDto userDto) throws UserNotFoundException;
 
-    public UserDto logIn(UserDto userDto) throws UserNotFoundException;
+    public User logIn(UserDto userDto) throws UserNotFoundException;
 
     public UserDto logOut(UserDto userDto) throws UserNotFoundException;
 }

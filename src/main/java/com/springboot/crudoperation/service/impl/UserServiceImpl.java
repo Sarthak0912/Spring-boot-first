@@ -9,7 +9,9 @@ import com.springboot.crudoperation.repository.UserRepository;
 import com.springboot.crudoperation.service.UserService;
 import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -34,14 +36,19 @@ public class UserServiceImpl implements UserService {
             throw new UserExistsException("User already exists!");
         }
         else{
-            userRepository.save(UserMapper.mapToUser(userDto));
-            return userDto;
-        }
+            User user1=userRepository.save(UserMapper.mapToUser(userDto));
+            return UserMapper.mapToUserDto(user1);        }
     }
 
     @Override
-    public UserDto logIn(UserDto userDto) throws UserNotFoundException {
-        return null;
+    public User logIn(UserDto userDto) throws UserNotFoundException {
+        User user = userRepository.findByUserName(userDto.getUserName());
+        if (user != null) {
+           return user;
+        }
+        else{
+            throw new UserExistsException("User doesn't exist!");
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@ public class UserMapper {
 
     public static UserDto mapToUserDto(User user){
 
-        return UserDto.builder().userName(user.getUserName()).password(user.getPassword()).firstName(user.getFirstName()).LastName(user.getLastName()).emailId(user.getEmailId()).build();
+        return UserDto.builder().id(user.getId()).userName(user.getUsername()).password(user.getPassword()).firstName(user.getFirstName()).LastName(user.getLastName()).emailId(user.getEmailId()).build();
     }
 
     public  static User mapToUser(UserDto userDto){
